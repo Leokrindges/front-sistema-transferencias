@@ -1,7 +1,7 @@
 export interface CreateTransferRequestBody {
   externalId: string;
   amount: number;
-  expectedOn: Date;
+  expectedOn?: string | null;
   type: TypeTransfer;
 }
 enum TypeTransfer {
@@ -18,7 +18,7 @@ export interface Transfer {
   id: string;
   externalId: string;
   amount: number;
-  expectedOn: Date | null;
+  expectedOn: string | null;
   status: StatusTransfer;
   createdAt: Date;
   type: TypeTransfer;
