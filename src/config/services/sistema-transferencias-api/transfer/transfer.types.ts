@@ -4,6 +4,12 @@ export interface CreateTransferRequestBody {
   expectedOn?: string | null;
   type: TypeTransfer;
 }
+
+export interface ListAllRequestParams {
+  limit?: number;
+  page?: number;
+}
+
 enum TypeTransfer {
   Entrada = "Entrada",
   Saida = "Saida",
