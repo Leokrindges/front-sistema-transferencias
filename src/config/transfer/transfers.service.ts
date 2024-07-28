@@ -1,6 +1,6 @@
 import { isAxiosError } from "axios";
 import { CreateTransferRequestBody, Transfer } from "./transfer.types";
-import { ResponseAPI, sistemaTransferenciasAPI } from "../api-cliente-http";
+import { ResponseAPI, sistemaTransferenciasAPI } from "../services/sistema-transferencias-api/api-cliente-http";
 
 export async function createTransfer(data: CreateTransferRequestBody) {
   try {
