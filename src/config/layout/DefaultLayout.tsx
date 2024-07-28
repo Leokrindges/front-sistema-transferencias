@@ -9,7 +9,7 @@ interface DefaultLayoutProps {
 
 export function DefaultLayout({ children }: DefaultLayoutProps) {
   return (
-    <Stack>
+    <Stack spacing={5}>
       <Navbar />
       {children}
       <Footer />
