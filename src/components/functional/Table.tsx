@@ -46,7 +46,7 @@ function Row({ row }: RowProps) {
           {formattedCreatedAt}
         </TableCell>
         <TableCell align="right">{row.type}</TableCell>
-        <TableCell align="right">R$ {row.amount}</TableCell>
+        <TableCell align="right">R$ {Number(row.amount).toFixed(2)}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

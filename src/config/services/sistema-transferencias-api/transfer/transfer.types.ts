@@ -2,7 +2,7 @@ export interface CreateTransferRequestBody {
   externalId: string;
   amount: number;
   expectedOn?: string | null;
-  type: TypeTransfer;
+  type: string;
 }
 
 export interface ListAllRequestParams {
