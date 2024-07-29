@@ -62,7 +62,7 @@ export default function ModalTransfer({ isOpen, onClose }: ModalTransferProps) {
       externalId: externalId,
       expectedOn: formattedDate,
       amount: Number(amount),
-      type: "Entrada",
+      type: type,
     };
 
     if (!validateInputs(data)) {

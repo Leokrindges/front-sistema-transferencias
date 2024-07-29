@@ -26,7 +26,7 @@ export function Home() {
 
   useEffect(() => {
     listTransfers(1, 10);
-  }, []);
+  }, [transfers]);
 
   async function fetchTransferById(id: string) {
     const resultado = await getTransferById(id);
