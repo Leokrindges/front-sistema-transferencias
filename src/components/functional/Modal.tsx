@@ -121,7 +121,6 @@ export default function ModalTransfer({ isOpen, onClose }: ModalTransferProps) {
           value={type}
           onChange={handleTypeChange}
           fullWidth
-          required
         >
           <MenuItem value={"Entrada"}>Entrada</MenuItem>
           <MenuItem value={"Saida"}>Saida</MenuItem>

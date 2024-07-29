@@ -30,7 +30,6 @@ export function Home() {
 
   async function fetchTransferById(id: string) {
     const resultado = await getTransferById(id);
-    console.log(resultado);
 
     if (!resultado.ok) {
       alert(resultado.message);
