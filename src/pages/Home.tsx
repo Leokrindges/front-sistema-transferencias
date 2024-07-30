@@ -1,4 +1,4 @@
-import { Box, Container, Fab, Stack } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import TableTransfers from "../components/functional/Table";
 import { useEffect, useState } from "react";
 import { Transfer } from "../config/services/sistema-transferencias-api/transfer/transfer.types";
@@ -28,6 +28,7 @@ export function Home() {
     listTransfers(1, 10);
   }, [transfers]);
 
+  //Para buscar por ID
   async function fetchTransferById(id: string) {
     const resultado = await getTransferById(id);
 
@@ -46,11 +47,18 @@ export function Home() {
   return (
     <Container
       component="main"
-      maxWidth="xl"
-      sx={{ justifyContent: "center", minHeight: "80vh" }}
+      maxWidth={false}
+      sx={{
+        display: "flex",
+        width: "97vw",
+        justifyContent: "center",
+        minHeight: "80vh",
+        flexDirection:"row",
+        paddingTop:"5%"
+      }}
     >
-      <Stack maxWidth="lg">
-        <Box component="section" sx={{ width: "100%" }}>
+      <Stack maxWidth="lg" sx={{ width: "100%" }}>
+        <Box component="section">
           <TableTransfers listTransfer={transfers} />
         </Box>
       </Stack>

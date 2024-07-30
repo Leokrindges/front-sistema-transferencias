@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <Box sx={{ flexGrow: 3 }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton
             size="large"
@@ -38,7 +38,7 @@ export default function Navbar() {
           <Button color="inherit" onClick={openModal}>
             Nova Transferência
           </Button>
-          <Typography color="inherit">R$ 100,00</Typography>
+          <Typography paddingLeft={3} color="inherit">R$ 100,00</Typography>
         </Toolbar>
       </AppBar>
       <ModalTransfer isOpen={modalCreate} onClose={closeModal} />

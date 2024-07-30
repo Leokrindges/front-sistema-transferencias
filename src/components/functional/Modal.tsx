@@ -72,11 +72,13 @@ export default function ModalTransfer({ isOpen, onClose }: ModalTransferProps) {
     const result = await createTransfer(data);
     if (!result.ok) {
       alert(result.message);
+      onClose();
+      setAlertOpen(false);
       return;
     }
-    alert(result.message);
     setAlertOpen(false);
     onClose();
+    alert(result.message);
   };
 
   return (

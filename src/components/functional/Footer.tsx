@@ -1,14 +1,17 @@
-import { Container, Link, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 export function Footer() {
   return (
-    <Container component='footer'>
-      <Typography variant='body2' color={"GrayText"} textAlign='center' marginTop={5}>
-        Copyright &copy;&nbsp;
-        <Link href='https://growdev.com.br' target='_blank'>
-          Meu site
-        </Link>
-        &nbsp;
+    <Container component="footer" maxWidth={false} disableGutters>
+      <Typography
+        variant="body2"
+        color={"GrayText"}
+        textAlign="center"
+        marginTop={5}
+        fontSize={25}
+        
+      >
+        Copyright &copy;&nbsp; &nbsp;Leonardo Krindges{" "}
         {new Date().getFullYear()}.
       </Typography>
     </Container>

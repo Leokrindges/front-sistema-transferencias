@@ -3,18 +3,31 @@ import { createTheme } from "@mui/material/styles";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#333333",
+      main: "#EDEDED",
     },
     secondary: {
       main: "#808080",
     },
     text: {
-      primary: "#ffffff",
-      secondary: "#b3b3b3",
+      primary: "#4BBEA3",
+      secondary: "#4BBEA3",
     },
     background: {
-      default: "#1a1a1a",
-      paper: "#333333",
+      default: "#839b96",
+      paper: "#EDEDED",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#E81E63", 
+          color: "#FFFFFF", 
+          '&:hover': {
+            backgroundColor: "#d35a83",
+          },
+        },
+      },
     },
   },
 });
