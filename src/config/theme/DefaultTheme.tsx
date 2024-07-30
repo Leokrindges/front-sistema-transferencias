@@ -9,12 +9,12 @@ export const theme = createTheme({
       main: "#808080",
     },
     text: {
-      primary: "#4BBEA3",
-      secondary: "#4BBEA3",
+      primary: "#42a991",
+      secondary: "#42a991",
     },
     background: {
-      default: "#839b96",
-      paper: "#EDEDED",
+      default: "#EDEDED",
+      paper: "#ced0d0",
     },
   },
   components: {
