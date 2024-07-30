@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from "@mui/material";
+import { Box, Container, Pagination, Stack, Typography } from "@mui/material";
 import TableTransfers from "../components/functional/Table";
 import { useEffect, useState } from "react";
 import { Transfer } from "../config/services/sistema-transferencias-api/transfer/transfer.types";
@@ -9,24 +9,29 @@ import {
 
 export function Home() {
   const [transfers, setTransfers] = useState<Array<Transfer>>([]);
-  const [selectedTransfer, setSelectedTransfer] = useState<Transfer | null>(
+  const [selectedTransfer, setSelectedTransfer] = useState<Transfer | null>( //estado da rota de busca por ID
     null
   );
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalRegisters, setTotalResgisters] = useState(0);
+
+  useEffect(() => {
+    listTransfers(page, 10);
+  }, [page, totalPages]);
 
   async function listTransfers(page: number, limit: number) {
-    const resultado = await getTransferAll({ page, limit });
+    const result = await getTransferAll({ page, limit });
 
-    if (!resultado.ok) {
-      alert(resultado.message);
+    if (!result.ok) {
+      alert(result.message);
       setTransfers([]);
       return;
     }
-    setTransfers(resultado.data!);
+    setTransfers(result.data!);
+    setTotalPages(result.pagination?.totalPages ?? 1);
+    setTotalResgisters(result.pagination?.count ?? 0);
   }
-
-  useEffect(() => {
-    listTransfers(1, 10);
-  }, [transfers]);
 
   //Para buscar por ID
   async function fetchTransferById(id: string) {
@@ -40,9 +45,16 @@ export function Home() {
     setSelectedTransfer(resultado.data!);
   }
 
-  useEffect(() => {
-    listTransfers(1, 10);
-  }, []);
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    listTransfers(value, 10);
+
+    //Esse comando rola a tela para cima quando clicar em trocar de página
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <Container
@@ -53,13 +65,24 @@ export function Home() {
         width: "97vw",
         justifyContent: "center",
         minHeight: "80vh",
-        flexDirection:"row",
-        paddingTop:"5%"
+        flexDirection: "row",
+        paddingTop: "5%",
       }}
     >
-      <Stack maxWidth="lg" sx={{ width: "100%" }}>
+      <Stack maxWidth="lg" spacing={4} sx={{ width: "100%" }}>
         <Box component="section">
+          <Typography>Transferencias realizadas: {totalRegisters} </Typography>
           <TableTransfers listTransfer={transfers} />
+        </Box>
+        <Box>
+          <Stack spacing={2} alignItems="center">
+            <Typography>Página: {page}</Typography>
+            <Pagination
+              count={totalPages}
+              page={page}
+              onChange={handleChange}
+            />
+          </Stack>
         </Box>
       </Stack>
     </Container>
