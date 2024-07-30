@@ -4,16 +4,11 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import {
-  Alert,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
+import { Alert, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { createTransfer } from "../../config/services/sistema-transferencias-api/transfer/transfers.service";
 import { CreateTransferRequestBody } from "../../config/services/sistema-transferencias-api/transfer/transfer.types";
 import moment from "moment";
+import { useSnackbar } from "notistack";
 
 const style = {
   position: "absolute",
@@ -35,6 +30,7 @@ interface ModalTransferProps {
 export default function ModalTransfer({ isOpen, onClose }: ModalTransferProps) {
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [type, setType] = React.useState("");
+  const { enqueueSnackbar } = useSnackbar(); // Hook para usar o snackbar que vai mostrar as mensagens que retornar da API
 
   const handleTypeChange = (event: SelectChangeEvent<string>) => {
     setType(event.target.value);
@@ -71,14 +67,15 @@ export default function ModalTransfer({ isOpen, onClose }: ModalTransferProps) {
 
     const result = await createTransfer(data);
     if (!result.ok) {
-      alert(result.message);
-      onClose();
+      enqueueSnackbar(result.message, { variant: "error" });
       setAlertOpen(false);
       return;
     }
+
+    enqueueSnackbar(result.message, { variant: "success" });
     setAlertOpen(false);
+    setType("");
     onClose();
-    alert(result.message);
   };
 
   return (

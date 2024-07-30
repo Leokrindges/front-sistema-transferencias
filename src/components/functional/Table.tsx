@@ -33,7 +33,7 @@ function Row({ row }: RowProps) {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset", } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"

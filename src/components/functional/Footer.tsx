@@ -9,7 +9,6 @@ export function Footer() {
         textAlign="center"
         marginTop={5}
         fontSize={25}
-        
       >
         Copyright &copy;&nbsp; &nbsp;Leonardo Krindges{" "}
         {new Date().getFullYear()}.

@@ -5,12 +5,15 @@ import "@fontsource/roboto/700.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { theme } from "./config/theme/DefaultTheme";
 import { AppRoutes } from "./routes/AppRoutes";
+import { SnackbarProvider } from "notistack";
 
 export function App() {
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppRoutes />
+      <SnackbarProvider maxSnack={3}>
+        <CssBaseline />
+        <AppRoutes />
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }
