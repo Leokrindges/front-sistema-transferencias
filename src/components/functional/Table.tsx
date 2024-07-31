@@ -14,7 +14,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Transfer } from "../../config/services/sistema-transferencias-api/transfer/transfer.types";
 import moment from "moment";
-import { formattedValuesDecimal } from "../../util/formatedValuesDecimal.utils";
 
 interface TableProps {
   listTransfer: Transfer[];
@@ -29,11 +28,12 @@ function Row({ row }: RowProps) {
 
   const formattedCreatedAt = moment(row.createdAt).format("DD/MM/YYYY HH:mm");
   const formattedExpectedOn = row.expectedOn
-    ? moment(row.expectedOn).format("DD/MM/YYYY") : "N/A"; 
+    ? moment(row.expectedOn).format("DD/MM/YYYY")
+    : "N/A";
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "unset", } }}>
+      <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
         <TableCell>
           <IconButton
             aria-label="expand row"
@@ -47,7 +47,13 @@ function Row({ row }: RowProps) {
           {formattedCreatedAt}
         </TableCell>
         <TableCell align="right">{row.type}</TableCell>
-        <TableCell align="right">R$ {formattedValuesDecimal(Number(row.amount).toFixed())}</TableCell>
+        <TableCell align="right">
+          {" "}
+          {new Intl.NumberFormat("pt-br", {
+            style: "currency",
+            currency: "BRL",
+          }).format(row.amount)}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
