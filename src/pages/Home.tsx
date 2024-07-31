@@ -9,16 +9,14 @@ import {
 
 export function Home() {
   const [transfers, setTransfers] = useState<Array<Transfer>>([]);
-  const [selectedTransfer, setSelectedTransfer] = useState<Transfer | null>( //estado da rota de busca por ID
-    null
-  );
+  const [selectedTransfer, setSelectedTransfer] = useState<Transfer | null>(null); //estado da rota de busca por ID
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalRegisters, setTotalResgisters] = useState(0);
+  const [totalRegisters, setTotalRegisters] = useState(0);
 
   useEffect(() => {
     listTransfers(page, 10);
-  }, [page, totalPages]);
+  }, [page]);
 
   async function listTransfers(page: number, limit: number) {
     const result = await getTransferAll({ page, limit });
@@ -30,10 +28,10 @@ export function Home() {
     }
     setTransfers(result.data!);
     setTotalPages(result.pagination?.totalPages ?? 1);
-    setTotalResgisters(result.pagination?.count ?? 0);
+    setTotalRegisters(result.pagination?.count ?? 0);
   }
 
-  //Para buscar por ID
+ //função busca por ID
   async function fetchTransferById(id: string) {
     const resultado = await getTransferById(id);
 
@@ -47,9 +45,7 @@ export function Home() {
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
-    listTransfers(value, 10);
 
-    //Esse comando rola a tela para cima quando clicar em trocar de página
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -72,10 +68,9 @@ export function Home() {
       <Stack maxWidth="lg" spacing={4} sx={{ width: "100%" }}>
         <Box component="section">
           <Typography>
-            {" "}
             {totalRegisters === 0
               ? "AINDA NÃO FOI EFETUADA NENHUMA TRANSFERÊNCIA"
-              : `TOTAL DE TRANSFERÊNCIAS REALIZADAS: ${totalRegisters}`}{" "}
+              : `TOTAL DE TRANSFERÊNCIAS REALIZADAS: ${totalRegisters}`}
           </Typography>
           <TableTransfers listTransfer={transfers} />
         </Box>
