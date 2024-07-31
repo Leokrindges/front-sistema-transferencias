@@ -71,14 +71,19 @@ export function Home() {
     >
       <Stack maxWidth="lg" spacing={4} sx={{ width: "100%" }}>
         <Box component="section">
-          <Typography>Transferencias realizadas: {totalRegisters} </Typography>
+          <Typography>
+            {" "}
+            {totalRegisters === 0
+              ? "AINDA NÃO FOI EFETUADA NENHUMA TRANSFERÊNCIA"
+              : `TOTAL DE TRANSFERÊNCIAS REALIZADAS: ${totalRegisters}`}{" "}
+          </Typography>
           <TableTransfers listTransfer={transfers} />
         </Box>
         <Box>
           <Stack spacing={2} alignItems="center">
             <Typography>Página: {page}</Typography>
             <Pagination
-              count={totalPages}
+              count={totalPages > 1 ? totalPages : 1}
               page={page}
               onChange={handleChange}
             />
